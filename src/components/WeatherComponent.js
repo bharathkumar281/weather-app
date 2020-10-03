@@ -78,8 +78,10 @@ class Weather extends Component {
             }
         });
         this.setState({
-            forecast: forecastData
+            forecast: forecastData,
+            city: forecast.city.name
         });
+        console.log(forecast);
     }
 
     render() {
@@ -104,6 +106,13 @@ class Weather extends Component {
                                             <h4>Weather</h4>
                                         </BreadcrumbItem>
                                     </Breadcrumb>
+                                    <Card className='shadow'>
+                                        <CardBody>
+                                            <h1 className='text-center'>
+                                                {this.state.city}
+                                            </h1>
+                                        </CardBody>
+                                    </Card>
                                 </Container>
                                 <div id='accordion'>
                                     {weatherItemList}
