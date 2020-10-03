@@ -3,8 +3,10 @@ import Chart from 'chart.js/dist/Chart';
 
 export const Graph = (props) => {
 
+    const chartId = 'chart' + props.index;
+
     useEffect(() => {
-        const ctx = document.getElementById('chart' + props.index);
+        const ctx = document.getElementById(chartId);
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -60,6 +62,6 @@ export const Graph = (props) => {
     });
 
     return (
-        <canvas id={'chart' + props.index}></canvas>
+        <canvas id={chartId}></canvas>
     );
 }
