@@ -1,4 +1,6 @@
-# React Hello World!
+# React Weather App !
+
+This Responsive Application uses [OpenWeatherMap API](https://openweathermap.org/api) to fetch weather information and [Chart js](https://www.chartjs.org) to display Charts
 
 ## Available Scripts
 
