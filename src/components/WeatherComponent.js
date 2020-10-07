@@ -3,6 +3,7 @@ import { Row, Container, Spinner, Breadcrumb, BreadcrumbItem, Col, Card, CardBod
 import * as urls from '../shared/urls';
 import { Link } from 'react-router-dom';
 import { WeatherItem } from './WeatherItemComponent';
+import { Fade } from 'react-animation-components';
 
 export default class Weather extends Component {
 
@@ -47,7 +48,7 @@ export default class Weather extends Component {
             })
             .catch(error => {
                 alert(error.message);
-                window.location = '/home';
+                window.location.href = '/#/home';
             });
     }
 
@@ -106,7 +107,6 @@ export default class Weather extends Component {
     render() {
 
         if (this.state.forecast) {
-
             const weatherItemList = [];
             var index = 0;
             const celsius = String.fromCharCode(176) + 'C';
@@ -135,7 +135,17 @@ export default class Weather extends Component {
             }
 
             for (var date_txt in this.state.forecast) {
-                if (index !== 0) weatherItemList.push(<WeatherItem key={index} units={celsius} date_txt={date_txt} data={this.state.forecast[date_txt]} index={index} renderData={renderData} />);
+                if (index !== 0) {
+                    weatherItemList.push(
+                        <WeatherItem
+                            key={index}
+                            units={celsius}
+                            date_txt={date_txt}
+                            data={this.state.forecast[date_txt]}
+                            index={index}
+                            renderData={renderData} />
+                    );
+                }
                 index++;
             }
 
@@ -143,44 +153,38 @@ export default class Weather extends Component {
                 <Container fluid>
                     <Row className='justify-content-center'>
                         <Col xs={12} xl={11}>
-                            <Container fluid>
-                                <Breadcrumb className='shadow'>
-                                    <BreadcrumbItem active>
-                                        <Link to='/home'><h4>Home</h4></Link>
-                                    </BreadcrumbItem>
-                                    <BreadcrumbItem>
-                                        <h4>Weather</h4>
-                                    </BreadcrumbItem>
-                                </Breadcrumb>
-                                <Card className='shadow'>
-                                    <CardBody>
-                                        <Row className='align-items-center'>
-                                            <Col sm={3} lg={2} xl={1} className='d-none d-sm-block'>
-                                                <img src={urls.images.temperature} alt='temperature' className='img-fluid' />
-                                            </Col>
-                                            <Col xs={12} sm={9}>
-                                                <h1>{this.state.city}</h1>
-                                                <h3>{this.state.weather.temp + ' ' + celsius}</h3>
-                                                <h6>Now</h6>
-                                            </Col>
-                                        </Row>
-                                    </CardBody>
-                                </Card>
-                                <Row>
-                                    <Col xs={12} sm={6} lg={3}>
-                                        {renderData(urls.images[this.state.weather.icon], this.state.weather.description, current_time, '')}
-                                    </Col>
-                                    <Col xs={12} sm={6} lg={3}>
-                                        {renderData(urls.images.humidity, 'Humidty', this.state.weather.humidity, '%')}
-                                    </Col>
-                                    <Col xs={12} sm={6} lg={3}>
-                                        {renderData(urls.images.pressure, 'Pressure', this.state.weather.pressure, 'hPA')}
-                                    </Col>
-                                    <Col xs={12} sm={6} lg={3}>
-                                        {renderData(urls.images.wind, 'Wind Speed', this.state.weather.wind, 'm/s')}
-                                    </Col>
-                                </Row>
-                            </Container>
+                            <Fade in>
+                                <Container fluid>
+                                    <Breadcrumb className='shadow'>
+                                        <BreadcrumbItem active>
+                                            <Link to='/home'><h4>Home</h4></Link>
+                                        </BreadcrumbItem>
+                                        <BreadcrumbItem>
+                                            <h4>Weather</h4>
+                                        </BreadcrumbItem>
+                                    </Breadcrumb>
+                                    <Card className='shadow'>
+                                        <CardBody>
+                                            <Row className='align-items-center'>
+                                                <Col sm={3} lg={2} xl={1} className='d-none d-sm-block'>
+                                                    <img src={urls.images.temperature} alt='temperature' className='img-fluid' />
+                                                </Col>
+                                                <Col xs={12} sm={9}>
+                                                    <h1>{this.state.city}</h1>
+                                                    <h3>{this.state.weather.temp + ' ' + celsius}</h3>
+                                                    <h6>Now</h6>
+                                                </Col>
+                                            </Row>
+                                        </CardBody>
+                                    </Card>
+                                    <Row>
+                                        <Col xs={12} sm={6} lg={3}> {renderData(urls.images[this.state.weather.icon], this.state.weather.description, current_time, '')} </Col>
+                                        <Col xs={12} sm={6} lg={3}> {renderData(urls.images.humidity, 'Humidty', this.state.weather.humidity, '%')} </Col>
+                                        <Col xs={12} sm={6} lg={3}> {renderData(urls.images.pressure, 'Pressure', this.state.weather.pressure, 'hPA')} </Col>
+                                        <Col xs={12} sm={6} lg={3}> {renderData(urls.images.wind, 'Wind Speed', this.state.weather.wind, 'm/s')} </Col>
+                                    </Row>
+                                </Container>
+                            </Fade>
                             <div id='accordion'>
                                 {weatherItemList}
                             </div>
@@ -188,13 +192,23 @@ export default class Weather extends Component {
                                 <Card className='shadow mt-3'>
                                     <CardBody>
                                         <h5>copyrights &copy; 2020</h5>
-                                        <p>Icons made by <a target='_blank' href="https://www.flaticon.com/authors/freepik" title="Freepik" rel='noopener noreferrer'>Freepik</a> from <a target='_blank' href="https://www.flaticon.com/" title="Flaticon" rel='noopener noreferrer'> www.flaticon.com</a></p>
+                                        <p>
+                                            Icons made by
+                                            <a target='_blank' href="https://www.flaticon.com/authors/freepik" title="Freepik" rel='noopener noreferrer'>
+                                                Freepik
+                                            </a>
+                                            from
+                                            <a target='_blank' href="https://www.flaticon.com/" title="Flaticon" rel='noopener noreferrer'>
+                                                www.flaticon.com
+                                            </a>
+                                        </p>
                                     </CardBody>
                                 </Card>
                             </Container>
                         </Col>
                     </Row>
                 </Container>
+
             );
         }
         else {

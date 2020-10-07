@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardBody, Col, Container, Row } from 'reactstrap';
 import { Graph } from './GraphComponent';
 import * as urls from '../shared/urls';
+import { Fade } from 'react-animation-components';
 
 export const WeatherItem = (props) => {
 
@@ -17,19 +18,21 @@ export const WeatherItem = (props) => {
             <div id={'heading' + index}>
                 <a className='d-block header-link' data-toggle='collapse' href={'#collapse' + index} aria-expanded='false' aria-controls={'collapse' + index}>
                     <Container fluid>
-                        <Card className='shadow mt-2'>
-                            <CardBody>
-                                <Row className='align-items-center'>
-                                    <Col sm={3} lg={2} xl={1} className='d-none d-sm-block'>
-                                        <img src={urls.images.temperature} alt='temperature' className='img-fluid' />
-                                    </Col>
-                                    <Col xs={12} sm={9}>
-                                        <h3>{temp.toFixed(2)} {props.units}</h3>
-                                        <h6>{props.date_txt}</h6>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-                        </Card>
+                        <Fade in>
+                            <Card className='shadow mt-2'>
+                                <CardBody>
+                                    <Row className='align-items-center'>
+                                        <Col sm={3} lg={2} xl={1} className='d-none d-sm-block'>
+                                            <img src={urls.images.temperature} alt='temperature' className='img-fluid' />
+                                        </Col>
+                                        <Col xs={12} sm={9}>
+                                            <h3>{temp.toFixed(2)} {props.units}</h3>
+                                            <h6>{props.date_txt}</h6>
+                                        </Col>
+                                    </Row>
+                                </CardBody>
+                            </Card>
+                        </Fade>
                     </Container>
                 </a>
             </div>
@@ -47,9 +50,7 @@ export const WeatherItem = (props) => {
                             <Row>
                                 {props.data.descriptions.map((desc, i) => {
                                     return (
-                                        <Col xs={12} md={6} key={i}>
-                                            {props.renderData(urls.images[props.data.icons[i]], desc, props.data.times[i], '')}
-                                        </Col>
+                                        <Col xs={12} md={6} key={i}> {props.renderData(urls.images[props.data.icons[i]], desc, props.data.times[i], '')} </Col>
                                     );
                                 })}
                             </Row>
