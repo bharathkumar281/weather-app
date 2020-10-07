@@ -1,6 +1,8 @@
 # React Weather App !
 
-This Responsive Application uses [OpenWeatherMap API](https://openweathermap.org/api) to fetch weather information and [Chart js](https://www.chartjs.org) to display Charts
+This Responsive Web Application can fetch weather from your current location as well as any other location!
+It uses [OpenWeatherMap API](https://openweathermap.org/api) to fetch weather information and [Chart js](https://www.chartjs.org) to display Charts.<br>
+This Application is published on [weather-app](https://bharathkumar281.github.io/weather-app)
 
 ## Available Scripts
 
